@@ -1,0 +1,32 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Comment {
+  id: Int!
+  content: String!
+  user: User!
+}
+
+type User {
+  id: Int!
+  name: String!
+  email: String!
+  comments: [Comment!]!
+}
+
+type Query {
+  users: [User!]!
+  user(id: Int!): User!
+  comments: [Comment!]!
+  comment(id: Int!): Comment!
+}
+
+type Mutation {
+  createUser(name: String!, email: String!): User!
+  updateUser(id: Int!, name: String, email: String): User!
+  deleteUser(id: Int!): Boolean!
+  createComment(content: String!, userId: Int!): Comment!
+  updateComment(id: Int!, content: String!): Comment!
+  deleteComment(id: Int!): Boolean!
+}
