@@ -23,10 +23,30 @@ type Query {
 }
 
 type Mutation {
-  createUser(name: String!, email: String!): User!
-  updateUser(id: Int!, name: String, email: String): User!
+  createUser(data: CreateUserInput!): User!
+  updateUser(id: Int!, data: UpdateUserInput!): User!
   deleteUser(id: Int!): Boolean!
-  createComment(content: String!, userId: Int!): Comment!
-  updateComment(id: Int!, content: String!): Comment!
+  createComment(data: CreateCommentInput!): Comment!
+  updateComment(id: Int!, data: UpdateCommentInput!): Comment!
   deleteComment(id: Int!): Boolean!
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+}
+
+input UpdateUserInput {
+  name: String
+  email: String
+}
+
+input CreateCommentInput {
+  content: String!
+  userId: Int!
+}
+
+input UpdateCommentInput {
+  content: String
+  userId: Int
 }
