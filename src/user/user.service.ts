@@ -22,14 +22,25 @@ export class UserService {
         return user;
     }
 
-    create(data: Partial<User>): Promise<User> {
-        const user = this.userRepo.create(data);
-        return this.userRepo.save(user);
+    async create(data: Partial<User>): Promise<User> {
+        try {
+            const user = this.userRepo.create(data);
+            return await this.userRepo.save(user);
+        } catch (error) {
+            throw new Error(`Failed to create user: ${error.message}`);
+        }
     }
 
     async update(id: number, data: Partial<User>): Promise<User> {
-        await this.userRepo.update(id, data);
-        return this.findOne(id);
+        try {
+            const updateResult = await this.userRepo.update(id, data);
+            if (updateResult.affected === 0) {
+                throw new Error(`User with id ${id} not found`);
+            }
+            return this.findOne(id);
+        } catch (error) {
+            throw new Error(`Failed to update user: ${error.message}`);
+        }
     }
 
     async delete(id: number): Promise<boolean> {
