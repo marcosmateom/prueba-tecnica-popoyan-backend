@@ -12,7 +12,7 @@ type User {
   id: Int!
   name: String!
   email: String!
-  comments: [Comment!]!
+  comments: [Comment]
 }
 
 type Query {

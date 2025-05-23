@@ -17,7 +17,7 @@ export class User {
   @Field()
   email: string;
 
-  @OneToMany(() => Comment, (comment) => comment.user)
-  @Field(() => [Comment])
+  @OneToMany(() => Comment, (comment) => comment.user, { cascade: false, eager: false })
+  @Field(() => [Comment], { nullable: 'itemsAndList' })
   comments: Comment[];
 }
